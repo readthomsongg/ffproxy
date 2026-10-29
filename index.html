@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080d14">
+<meta name="description" content="Proxy Server — a modern animated landing page demo.">
+<title>PROXY SERVER</title>
+
+<style>
+:root {
+  --bg: #080d14;
+  --panel: #101925;
+  --panel2: #142130;
+  --green: #37f0a0;
+  --muted: #91a0b5;
+  --border: rgba(155,180,205,.15);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  color: #f4f8ff;
+  background:
+    radial-gradient(ellipse at 50% 0%, #102d2b 0%, transparent 48%),
+    var(--bg);
+  font-family: Inter, system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+}
+
+button, a { font: inherit; }
+
+a { color: inherit; text-decoration: none; }
+
+.container {
+  width: min(100% - 30px, 570px);
+  margin: auto;
+}
+
+header {
+  padding: 22px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 17px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+.logo {
+  display: grid;
+  place-items: center;
+  width: 39px;
+  height: 39px;
+  border-radius: 12px;
+  color: #04150d;
+  background: var(--green);
+  box-shadow: 0 0 24px #37f04425;
+  font-size: 22px;
+}
+
+.live {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--green);
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  font-weight: 800;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  background: var(--green);
+  border-radius: 50%;
+  animation: pulse 1.4s infinite;
+}
+
+.hero {
+  padding: 42px 0 25px;
+  text-align: center;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--green);
+  background: #37f0a00e;
+  border: 1px solid #37f0a02c;
+  border-radius: 100px;
+  padding: 9px 13px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.6px;
+}
+
+h1 {
+  font-size: clamp(35px, 9vw, 58px);
+  line-height: .99;
+  letter-spacing: -2.2px;
+  margin: 23px 0 17px;
+  font-weight: 950;
+}
+
+h1 span {
+  color: var(--green);
+  text-shadow: 0 0 30px #37f04420;
+}
+
+.subtitle {
+  max-width: 390px;
+  margin: auto;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.marquee {
+  margin: 30px 0;
+  padding: 12px 0;
+  overflow: hidden;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: #ffffff03;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 23s linear infinite;
+}
+
+.marquee-track span {
+  white-space: nowrap;
+  padding-right: 32px;
+  color: #a3b4c7;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.marquee b { color: var(--green); }
+
+.section {
+  margin: 20px 0;
+  padding: 19px;
+  background: linear-gradient(145deg, #142130, #0e1621);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: 0 16px 50px #00000016;
+}
+
+.section-heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 17px;
+}
+
+.step {
+  display: grid;
+  place-items: center;
+  flex: 0 0 37px;
+  height: 37px;
+  border-radius: 11px;
+  background: #37f0a015;
+  color: var(--green);
+  font-weight: 900;
+  font-size: 13px;
+}
+
+h2 {
+  font-size: 16px;
+  margin: 0;
+  letter-spacing: -.3px;
+}
+
+.small {
+  margin-top: 5px;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.video-wrap {
+  position: relative;
+  overflow: hidden;
+  border-radius: 13px;
+  background: #03070b;
+  border: 1px solid var(--border);
+  aspect-ratio: 16 / 9;
+}
+
+video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+.video-caption {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.7;
+  margin: 12px 0 0;
+}
+
+.notice {
+  margin-top: 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 13px;
+  border-radius: 12px;
+  background: #37f0a009;
+  border: 1px solid #37f0a025;
+  color: #c5d5d4;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.notice strong { color: var(--green); }
+
+.app-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.app-card::after {
+  content: "";
+  position: absolute;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: #37f0a00b;
+  filter: blur(25px);
+  right: -65px;
+  top: -60px;
+  pointer-events: none;
+}
+
+.app-info {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.app-icon {
+  display: grid;
+  place-items: center;
+  flex: 0 0 67px;
+  height: 67px;
+  border-radius: 18px;
+  background: linear-gradient(145deg, #203c43, #10201f);
+  border: 1px solid #37f04435;
+  color: var(--green);
+  font-size: 33px;
+  box-shadow: 0 0 25px #37f0440c;
+}
+
+.app-info h2 { font-size: 19px; }
+
+.app-label {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 5px 8px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: var(--green);
+}
+
+.description {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.8;
+  margin: 17px 0;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 10px;
+  min-height: 49px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--green);
+  color: #06150d;
+  font-size: 12px;
+  font-weight: 950;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: transform .2s, box-shadow .2s, background .2s;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 9px 30px #37f04425;
+}
+
+.button:active { transform: scale(.98); }
+
+.button.secondary {
+  background: #1b2937;
+  color: #e7eff9;
+  border: 1px solid var(--border);
+}
+
+.button:disabled {
+  opacity: .7;
+  cursor: not-allowed;
+}
+
+.status {
+  text-align: center;
+  color: var(--muted);
+  font-size: 10px;
+  margin: 12px 0 0;
+  line-height: 1.6;
+}
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.feature {
+  padding: 15px 12px;
+  border-radius: 13px;
+  background: #ffffff04;
+  border: 1px solid var(--border);
+  transition: border-color .25s, transform .25s;
+}
+
+.feature:hover {
+  transform: translateY(-3px);
+  border-color: #37f04460;
+}
+
+.feature-icon {
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+
+.feature h3 {
+  font-size: 12px;
+  margin: 0 0 6px;
+}
+
+.feature p {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.footer {
+  padding: 27px 0 35px;
+  text-align: center;
+  color: #64758a;
+  font-size: 10px;
+  line-height: 1.9;
+}
+
+.footer strong {
+  color: #b6c5d5;
+  letter-spacing: 1px;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes marquee {
+  to { transform: translateX(-50%); }
+}
+
+@keyframes pulse {
+  50% { opacity: .35; transform: scale(.75); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+.logo { animation: float 4s ease-in-out infinite; }
+
+@media (min-width: 700px) {
+  .hero { padding-top: 58px; }
+  .section { padding: 23px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+}
+</style>
+</head>
+
+<body>
+<header>
+  <div class="container nav">
+    <a href="#" class="brand" aria-label="Proxy Server home">
+      <span class="logo" aria-hidden="true">⬡</span>
+      <span>PROXY SERVER</span>
+    </a>
+    <div class="live"><span class="dot"></span> DEMO PAGE</div>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <div class="eyebrow"><span class="dot"></span> SIMPLE. MODERN. ANIMATED.</div>
+    <h1>YOUR NEXT<br><span>CONNECTION.</span></h1>
+    <p class="subtitle">
+      A sleek, mobile-friendly landing page with a video
+      preview, smooth animations and a neon interface.
+    </p>
+  </section>
+
+  <div class="marquee" aria-label="Website features">
+    <div class="marquee-track">
+      <span>✦ <b>MODERN DESIGN</b> &nbsp; ✦ SMOOTH ANIMATIONS &nbsp; ✦ MOBILE READY &nbsp; ✦ FREE HOSTING &nbsp;</span>
+      <span aria-hidden="true">✦ <b>MODERN DESIGN</b> &nbsp; ✦ SMOOTH ANIMATIONS &nbsp; ✦ MOBILE READY &nbsp; ✦ FREE HOSTING &nbsp;</span>
+    </div>
+  </div>
+
+  <section class="section reveal" id="watch">
+    <div class="section-heading">
+      <div class="step">01</div>
+      <div>
+        <h2>WATCH VIDEO</h2>
+        <div class="small">Sample video player</div>
+      </div>
+    </div>
+
+    <div class="video-wrap">
+      <video controls playsinline preload="metadata"
+        poster="https://peach.blender.org/wp-content/uploads/title_anouncement.jpg?x11217">
+        <source
+          src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
+          type="video/mp4">
+        Your browser does not support this video.
+      </video>
+    </div>
+
+    <p class="video-caption">
+      This is a sample demonstration video. Replace it with
+      a video you own or have permission to use.
+    </p>
+
+    <div class="notice">
+      <span aria-hidden="true">ⓘ</span>
+      <div>
+        <strong>DEMO MODE</strong><br>
+        The video is for preview only. It does not unlock
+        downloads or verify video completion.
+      </div>
+    </div>
+  </section>
+
+  <section class="section app-card reveal" id="app">
+    <div class="section-heading">
+      <div class="step">02</div>
+      <div>
+        <h2>APPLICATION</h2>
+        <div class="small">App information</div>
+      </div>
+    </div>
+
+    <div class="app-info">
+      <div class="app-icon" aria-hidden="true">⬡</div>
+      <div>
+        <h2>PROXY SERVER</h2>
+        <div class="small">Application name placeholder</div>
+        <span class="app-label">DEMO VERSION</span>
+      </div>
+    </div>
+
+    <p class="description">
+      Add your genuine application description here.
+      Include supported devices, features and any important
+      installation instructions.
+    </p>
+
+    <button class="button" id="downloadButton" type="button">
+      ↓ &nbsp; DOWNLOAD LINK NOT SET
+    </button>
+    <p class="status" id="downloadStatus" aria-live="polite">
+      Add your verified download URL in the code before
+      enabling this button.
+    </p>
+  </section>
+
+  <section class="section reveal">
+    <div class="section-heading">
+      <div class="step">03</div>
+      <div>
+        <h2>FEATURES</h2>
+        <div class="small">The essentials at a glance</div>
+      </div>
+    </div>
+
+    <div class="features">
+      <article class="feature">
+        <div class="feature-icon">⚡</div>
+        <h3>Clean Interface</h3>
+        <p>A modern design with clear content and buttons.</p>
+      </article>
+      <article class="feature">
+        <div class="feature-icon">◈</div>
+        <h3>Responsive Layout</h3>
+        <p>Designed to adapt to mobile and desktop screens.</p>
+      </article>
+      <article class="feature">
+        <div class="feature-icon">✦</div>
+        <h3>Smooth Effects</h3>
+        <p>Animated headline, glowing accents and transitions.</p>
+      </article>
+      <article class="feature">
+        <div class="feature-icon">▣</div>
+        <h3>Video Preview</h3>
+        <p>A built-in video player with standard controls.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section reveal">
+    <div class="section-heading">
+      <div class="step">04</div>
+      <div>
+        <h2>READY TO GET STARTED?</h2>
+        <div class="small">Customize this section for your project</div>
+      </div>
+    </div>
+
+    <p class="description">
+      Add a real call to action once your application,
+      download destination and website information are ready.
+    </p>
+    <a href="#watch" class="button secondary">
+      ↑ &nbsp; BACK TO VIDEO
+    </a>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <strong>PROXY SERVER</strong><br>
+    An independently created landing-page demo.<br>
+    No live statistics, user ratings or download claims are displayed.
+  </div>
+</footer>
+
+<script>
+// Reveal sections as the visitor scrolls.
+const revealItems = document.querySelectorAll(".reveal");
+
+if ("IntersectionObserver" in window) {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  revealItems.forEach((item) => observer.observe(item));
+} else {
+  revealItems.forEach((item) => item.classList.add("visible"));
+}
+
+// Keep the download disabled until a real URL is configured.
+const DOWNLOAD_URL = "";
+
+const downloadButton = document.getElementById("downloadButton");
+const downloadStatus = document.getElementById("downloadStatus");
+
+if (DOWNLOAD_URL.trim() !== "") {
+  downloadButton.textContent = "↓  DOWNLOAD APPLICATION";
+  downloadButton.addEventListener("click", () => {
+    window.open(DOWNLOAD_URL, "_blank", "noopener,noreferrer");
+  });
+} else {
+  downloadButton.disabled = true;
+  downloadButton.addEventListener("click", () => {
+    downloadStatus.textContent =
+      "The owner must configure a verified download URL first.";
+  });
+}
+</script>
+</body>
+      </html>
+      
